@@ -3,6 +3,7 @@ import 'package:nev/main.dart';
 
 import 'package:flutter/material.dart';
 import 'package:nev/provider.dart';
+import 'package:provider/provider.dart';
 
 class Detail extends StatelessWidget {
   Detail({
@@ -35,7 +36,39 @@ class Detail extends StatelessWidget {
         backgroundColor: const Color.fromRGBO(83, 151, 193, 1),
         title: Text(name),
       ),
-      body: Container(
+      body:  Consumer<Menu>(class Detail extends StatelessWidget {
+  Detail({
+    Key? key,
+    required this.name,
+    required this.price,
+    required this.image,
+    required this.detail,
+    required this.amout,
+  }) : super(key: key);
+
+  final String name;
+  final double price;
+  final String image;
+  final String detail;
+  late int amout; // Change to late
+
+  @override
+  Widget build(BuildContext context) {
+    Menu menu = Menu(
+      name: name,
+      price: price,
+      image: image,
+      detail: detail,
+      amout: amout,
+    );
+
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: const Color.fromRGBO(83, 151, 193, 1),
+        title: Text(name),
+      ),
+      body:  Consumer<Menu>(
+        builder: ((context, model, child) => Container(
         child: ListView(
           children: [
             SizedBox(
@@ -70,10 +103,12 @@ class Detail extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ),,
+      )
     );
+    )
   }
-}
+
 
 class Cart extends StatelessWidget {
   Cart({super.key});
